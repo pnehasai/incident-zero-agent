@@ -1,0 +1,49 @@
+
+=== baseline 30 min: 29 alert(s), 1 false alarm(s)
+  14:43:30 FALSE p95 latency of payment is 15.0 s (its 30-min baseline 0.0 s)
+  14:47:00 true  error rate of frontend is 5.9% (its 30-min baseline 0.7%); error rate of frontend-proxy is 3.4% (its 30-min baseline 0.4%)
+  14:52:00 true  p95 latency of frontend-proxy is 2.6 s (its 30-min baseline 0.1 s)
+  14:53:30 true  error rate of frontend is 14.4% (its 30-min baseline 1.3%); p95 latency of frontend is 15.0 s (its 30-min baseline 0.1 s)
+  15:04:30 true  error rate of frontend is 14.1% (its 30-min baseline 1.8%); p95 latency of frontend is 15.0 s (its 30-min baseline 0.1 s); error rate of frontend-prox
+  15:05:30 true  error rate of checkout is 50.0% (its 30-min baseline 0.5%); p95 latency of checkout is 13.3 s (its 30-min baseline 0.2 s)
+  15:09:30 true  operation POST /api/checkout of frontend fails 43% of calls (21 of 47 in 10 min; before 3%)
+  15:10:30 true  error rate of checkout is 10.7% (its 30-min baseline 2.2%)
+  15:13:30 true  error rate of frontend-proxy jumped to 3.6% (previous 2 min: 0.0%)
+  15:14:30 true  error rate of frontend is 13.1% (its 30-min baseline 3.2%); p95 latency of frontend is 1.6 s (its 30-min baseline 0.1 s)
+  15:15:30 true  operation oteldemo.CheckoutService/PlaceOrder of checkout fails 52% of calls (13 of 26 in 10 min; before 10%)
+  16:07:00 true  error rate of checkout is 6.7% (its 30-min baseline 0.0%)
+  16:07:30 true  error rate of payment is 20.9% (its 30-min baseline 1.8%)
+  16:11:30 true  CPU of ad is 90% of a core (its 30-min average 3%)
+  16:16:30 true  CPU of ad is 384% of a core (its 30-min average 4%)
+  16:25:00 true  p95 latency of checkout is 15.0 s (its 30-min baseline 0.2 s)
+  16:26:30 true  operation POST /oteldemo.CartService/EmptyCart of cart fails 22% of calls (4 of 18 in 10 min; before 0%)
+  16:31:00 true  p95 latency of checkout is 1.8 s (its 30-min baseline 0.2 s)
+  16:38:30 true  p95 latency of ad is 15.0 s (its 30-min baseline 0.0 s)
+  16:47:00 true  p95 latency of email is 1.2 s (its 30-min baseline 0.2 s); p95 latency of recommendation is 1.9 s (its 30-min baseline 0.0 s)
+  16:47:30 true  error rate of frontend is 3.0% (its 30-min baseline 0.0%); error rate of frontend-proxy is 2.1% (its 30-min baseline 0.0%)
+  16:49:00 true  p95 latency of checkout is 1.0 s (its 30-min baseline 0.3 s)
+  16:51:30 true  error rate of ad is 5.2% (its 30-min baseline 0.3%)
+  17:03:00 true  p95 latency of product-catalog is 7.6 s (its 30-min baseline 0.1 s)
+  17:03:30 true  p95 latency of frontend is 10.5 s (its 30-min baseline 0.2 s); p95 latency of frontend-proxy is 5.7 s (its 30-min baseline 0.2 s); p95 latency of reco
+  17:08:00 true  p95 latency of ad is 15.0 s (its 30-min baseline 0.0 s)
+  17:13:00 true  CPU of ad is 103% of a core (its 30-min average 6%); p95 latency of ad is 15.0 s (its 30-min baseline 0.7 s)
+  17:25:00 true  p95 latency of frontend-proxy is 3.0 s (its 30-min baseline 0.2 s)
+  17:29:30 true  traffic to frontend is 72.0 req/s (its 30-min baseline 18.1 req/s)
+  fault 14:46:20-14:48:04: detected after 40 s
+  fault 14:50:54-14:53:11: detected after 66 s
+  fault 15:02:56-15:05:32: detected after 94 s
+  fault 15:08:07-15:09:51: detected after 83 s
+  fault 15:11:52-15:14:17: detected after 98 s
+  fault 16:04:37-16:08:23: detected after 143 s
+  fault 16:10:39-16:18:04: detected after 51 s
+  fault 16:18:46-16:25:41: detected after 374 s
+  fault 16:27:20-16:34:45: detected after 220 s
+  fault 16:35:29-16:42:34: detected after 181 s
+  fault 16:43:14-16:48:20: detected after 226 s
+  fault 16:50:28-16:53:32: detected after 62 s
+  fault 16:54:03-17:01:17: detected after 537 s
+  fault 17:01:48-17:04:29: detected after 72 s
+  fault 17:06:34-17:09:03: detected after 86 s
+  fault 17:15:38-17:22:52: detected after 562 s
+  fault 17:23:23-17:26:04: detected after 97 s
+  fault 17:27:22-17:34:24: detected after 128 s

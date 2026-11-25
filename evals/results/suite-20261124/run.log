@@ -1,0 +1,377 @@
+OpenSearch: http://localhost:53684 (was unset; update .env to skip this lookup)
+
+===== S1: stop recommendation   (crashed service)
+  [21:13:17] over threshold: nothing
+  [21:13:33] over threshold: nothing
+  [21:13:48] over threshold: nothing
+  [21:14:04] over threshold: nothing
+  shop quiet after 48 s
+  [21:14:07] over threshold: nothing
+  [21:14:23] over threshold: nothing
+  [21:14:38] over threshold: nothing
+  [21:14:54] over threshold: nothing
+  [21:15:09] over threshold: nothing
+  [21:15:25] over threshold: ['frontend-proxy']
+  [21:15:41] over threshold: ['frontend', 'frontend', 'frontend-proxy']
+  ALERT after 95 s: Threshold alert: p95 latency of frontend-proxy is 2.4 s (its 30-min baseline 0.1 s)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124-S1   Status: DIAGNOSED
+Diagnosis: recommendation: recommendation container stopped reporting metrics and became unreachable (last seen 168s ago), causing upstream gRPC connection errors (EHOSTUNREACH / UNAVAILABLE) and request failures/timeouts in frontend (/api/recommendations p95 15000ms, error rate 62.3%).
+Confidence label: high (in where/how it fails, not in why)
+Supporting evidence: ev-resource_overview-22441b10, ev-search_traces-ba93e9eb, ev-service_health-727c1f20
+Uncertainty (still unknown): Telemetry cannot determine why the recommendation container stopped reporting or crashed.
+Model calls: 4  Tool calls: 8  Elapsed: 53.7s
+Report JSON: runs\20261124-S1\20261124-S1_report.json
+Report MD:   runs\20261124-S1\20261124-S1_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S1: PASS {'detection': True, 'diagnosis': True, 'fix': True} said='recommendation' confidence=high proposals=['restart_service:recommendation']
+
+===== S2: stop cart   ()
+  [21:17:09] over threshold: ['frontend', 'frontend', 'frontend-proxy']
+  [21:17:25] over threshold: ['frontend', 'frontend-proxy']
+  [21:17:41] over threshold: ['frontend', 'frontend-proxy']
+  [21:17:56] over threshold: ['frontend', 'frontend-proxy']
+  [21:18:13] over threshold: ['frontend', 'frontend-proxy']
+  [21:18:29] over threshold: ['frontend', 'frontend-proxy']
+  [21:18:45] over threshold: ['frontend', 'frontend-proxy']
+  [21:19:00] over threshold: ['frontend', 'frontend-proxy']
+  [21:19:16] over threshold: ['frontend']
+  [21:19:32] over threshold: ['frontend']
+  [21:19:48] over threshold: ['frontend']
+  [21:20:04] over threshold: ['frontend']
+  [21:20:19] over threshold: ['frontend']
+  [21:20:35] over threshold: nothing
+  [21:20:51] over threshold: nothing
+  [21:21:07] over threshold: nothing
+  [21:21:22] over threshold: nothing
+  shop quiet after 254 s
+  [21:21:26] over threshold: nothing
+  [21:21:41] over threshold: nothing
+  [21:21:57] over threshold: ['checkout', 'checkout', 'frontend', 'frontend-proxy']
+  [21:22:13] over threshold: ['checkout', 'checkout', 'frontend', 'frontend-proxy']
+  ALERT after 48 s: Threshold alert: error rate of checkout is 17.8% (its 30-min baseline 0.0%); p95 latency of checkout is 2.8 s (its 30-min baseline 0.2 s); error rate of frontend is 8.3% (its 30-min baseline 1.6%); error rate of frontend-proxy is 4.4% (its 30-min baseline 0.7%)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124-S2   Status: ESCALATED
+No diagnosis accepted (escalate to a human).
+Model calls: 4  Tool calls: 7  Elapsed: 71.38s
+Report JSON: runs\20261124-S2\20261124-S2_report.json
+Report MD:   runs\20261124-S2\20261124-S2_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Model request failed: LLM request failed (google_genai/gemini-3.5-flash-lite): GoogleAPIError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+limitation: No diagnosis accepted: escalate to a human operator.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S2: FAIL {'detection': True, 'diagnosis': False, 'fix': False} said=None confidence=None proposals=[]
+
+===== N1: none    (no fault: expects no alert)
+  [21:24:02] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:24:18] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:24:34] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:24:51] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:25:08] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:25:24] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [21:25:39] over threshold: ['checkout', 'frontend']
+  [21:25:55] over threshold: ['checkout', 'frontend']
+  [21:26:11] over threshold: ['checkout', 'frontend']
+  [21:26:27] over threshold: ['checkout', 'frontend']
+  [21:26:44] over threshold: ['checkout', 'frontend']
+  [21:27:00] over threshold: ['checkout', 'frontend']
+  [21:27:15] over threshold: ['checkout', 'frontend']
+  [21:27:31] over threshold: nothing
+  [21:27:47] over threshold: nothing
+  [21:28:04] over threshold: nothing
+  [21:28:20] over threshold: nothing
+  shop quiet after 260 s
+  [21:28:20] over threshold: nothing
+  [21:28:36] over threshold: nothing
+  [21:28:52] over threshold: nothing
+  [21:29:08] over threshold: nothing
+  [21:29:24] over threshold: nothing
+  [21:29:40] over threshold: nothing
+  [21:29:56] over threshold: nothing
+  [21:30:12] over threshold: nothing
+  [21:30:28] over threshold: nothing
+  [21:30:44] over threshold: nothing
+  [21:31:00] over threshold: nothing
+  [21:31:16] over threshold: nothing
+  [21:31:32] over threshold: nothing
+  [21:31:48] over threshold: nothing
+  [21:32:03] over threshold: nothing
+  [21:32:20] over threshold: nothing
+  [21:32:35] over threshold: nothing
+  [21:32:51] over threshold: nothing
+  [21:33:07] over threshold: nothing
+  [21:33:23] over threshold: nothing
+  [21:33:39] over threshold: nothing
+  [21:33:55] over threshold: nothing
+  [21:34:11] over threshold: nothing
+  [21:34:27] over threshold: nothing
+  [21:34:44] over threshold: nothing
+  [21:35:02] over threshold: nothing
+  [21:35:18] over threshold: nothing
+  [21:35:34] over threshold: nothing
+  [21:35:50] over threshold: nothing
+  [21:36:06] over threshold: nothing
+  [21:36:23] over threshold: nothing
+  [21:36:40] over threshold: nothing
+  [21:36:56] over threshold: nothing
+  [21:37:12] over threshold: nothing
+  [21:37:28] over threshold: nothing
+  [21:37:43] over threshold: nothing
+  [21:38:00] over threshold: nothing
+  [21:38:16] over threshold: nothing
+  no alert
+
+N1: PASS {'detection': True, 'diagnosis': True, 'fix': True} said=None confidence=None proposals=[]
+
+===== S3: stop product-catalog   ()
+  [21:38:34] over threshold: nothing
+  [21:38:50] over threshold: nothing
+  [21:39:07] over threshold: nothing
+  [21:39:23] over threshold: nothing
+  shop quiet after 51 s
+  [21:39:28] over threshold: nothing
+  [21:39:44] over threshold: nothing
+  [21:40:00] over threshold: ['frontend', 'recommendation']
+  [21:40:16] over threshold: ['frontend', 'frontend-proxy', 'recommendation']
+  ALERT after 49 s: Threshold alert: error rate of frontend jumped to 3.4% (previous 2 min: 0.0%); error rate of recommendation is 32.0% (its 30-min baseline 0.0%)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124-S3   Status: ESCALATED
+No diagnosis accepted (escalate to a human).
+Model calls: 1  Tool calls: 0  Elapsed: 40.12s
+Report JSON: runs\20261124-S3\20261124-S3_report.json
+Report MD:   runs\20261124-S3\20261124-S3_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Model request failed: LLM request failed (google_genai/gemini-3.5-flash-lite): GoogleAPIError: 504 DEADLINE_EXCEEDED. {'error': {'code': 504, 'message': 'Deadline expired before operation could complete.', 'status': 'DEADLINE_EXCEEDED'}}
+limitation: No diagnosis accepted: escalate to a human operator.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S3: FAIL {'detection': True, 'diagnosis': False, 'fix': False} said=None confidence=None proposals=[]
+
+===== S4: stop payment   ()
+  [21:41:19] over threshold: ['frontend', 'frontend', 'frontend-proxy', 'frontend-proxy', 'recommendation', 'recommendation']
+  [21:41:36] over threshold: ['frontend', 'frontend', 'frontend-proxy', 'frontend-proxy', 'recommendation', 'recommendation']
+  [21:41:52] over threshold: ['checkout', 'checkout', 'frontend', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [21:42:07] over threshold: ['checkout', 'checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [21:42:24] over threshold: ['checkout', 'frontend', 'recommendation']
+  [21:42:40] over threshold: ['checkout', 'frontend', 'recommendation']
+  [21:42:55] over threshold: ['frontend', 'recommendation']
+  [21:43:11] over threshold: ['frontend']
+  [21:43:28] over threshold: ['frontend']
+  [21:43:43] over threshold: ['frontend']
+  [21:43:59] over threshold: ['frontend']
+  [21:44:15] over threshold: nothing
+  [21:44:31] over threshold: ['payment']
+  [21:44:47] over threshold: nothing
+  [21:45:03] over threshold: ['payment']
+  [21:45:19] over threshold: nothing
+  [21:45:35] over threshold: nothing
+  [21:45:51] over threshold: nothing
+  [21:46:06] over threshold: nothing
+  shop quiet after 288 s
+  [21:46:12] over threshold: nothing
+  [21:46:28] over threshold: nothing
+  [21:46:43] over threshold: nothing
+  [21:46:59] over threshold: nothing
+  [21:47:14] over threshold: ['checkout']
+  [21:47:31] over threshold: ['checkout']
+  ALERT after 80 s: Threshold alert: error rate of checkout is 22.2% (its 30-min baseline 2.4%)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124-S4   Status: ESCALATED
+No diagnosis accepted (escalate to a human).
+Model calls: 2  Tool calls: 3  Elapsed: 74.12s
+Report JSON: runs\20261124-S4\20261124-S4_report.json
+Report MD:   runs\20261124-S4\20261124-S4_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Model request failed: LLM request failed (google_genai/gemini-3.5-flash-lite): GoogleAPIError: 503 UNAVAILABLE. {'error': {'code': 503, 'message': 'This model is currently experiencing high demand. Spikes in demand are usually temporary. Please try again later.', 'status': 'UNAVAILABLE'}}
+limitation: No diagnosis accepted: escalate to a human operator.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S4: FAIL {'detection': True, 'diagnosis': False, 'fix': False} said=None confidence=None proposals=[]
+
+===== S5: stop currency   ()
+  [21:49:14] over threshold: ['checkout', 'frontend']
+  [21:49:30] over threshold: ['checkout', 'frontend']
+  [21:49:47] over threshold: ['checkout', 'frontend']
+  [21:50:03] over threshold: ['checkout', 'frontend']
+  [21:50:19] over threshold: ['checkout', 'frontend']
+  [21:50:35] over threshold: nothing
+  [21:50:51] over threshold: nothing
+  [21:51:07] over threshold: nothing
+  [21:51:23] over threshold: nothing
+  shop quiet after 131 s
+  [21:51:25] over threshold: nothing
+  [21:51:41] over threshold: nothing
+  [21:51:57] over threshold: nothing
+  [21:52:12] over threshold: nothing
+  [21:52:28] over threshold: nothing
+  [21:52:44] over threshold: ['checkout', 'checkout']
+  [21:53:00] over threshold: ['checkout', 'checkout', 'frontend', 'frontend-proxy']
+  ALERT after 95 s: Threshold alert: error rate of checkout is 19.0% (its 30-min baseline 4.7%); p95 latency of checkout is 14.1 s (its 30-min baseline 0.3 s)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124-S5   Status: DIAGNOSED
+Diagnosis: currency: currency container stopped reporting metrics and became unreachable (connection error: dial tcp 172.18.0.15:7001: connect: no route to host / name resolver error: produced zero addresses), causing checkout place order to fail and time out.
+Confidence label: high (in where/how it fails, not in why)
+Supporting evidence: ev-overview-dd4ae751, ev-resource_overview-ceb75ba6, ev-search_traces-8096d7f5, ev-service_health-2cc7bc2b
+Uncertainty (still unknown): Exact reason why the currency container stopped cannot be determined from metrics and traces alone.
+Model calls: 6  Tool calls: 9  Elapsed: 133.51s
+Report JSON: runs\20261124-S5\20261124-S5_report.json
+Report MD:   runs\20261124-S5\20261124-S5_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Follow-up evidence exists for flagged services but the diagnosis cites none of it: payment
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S5: PASS {'detection': True, 'diagnosis': True, 'fix': True} said='currency' confidence=high proposals=['restart_service:currency']
+
+===== N2: none    (no fault, at the end of the run)
+  [21:56:09] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [21:56:25] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [21:56:42] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [21:57:00] over threshold: ['checkout', 'frontend', 'recommendation']
+  [21:57:16] over threshold: ['frontend']
+  [21:57:33] over threshold: ['frontend']
+  [21:57:49] over threshold: ['frontend']
+  [21:58:05] over threshold: ['frontend']
+  [21:58:21] over threshold: ['email', 'frontend']
+  [21:58:36] over threshold: nothing
+  [21:58:52] over threshold: nothing
+  [21:59:08] over threshold: nothing
+  [21:59:24] over threshold: nothing
+  shop quiet after 197 s
+  [21:59:24] over threshold: nothing
+  [21:59:40] over threshold: nothing
+  [21:59:56] over threshold: nothing
+  [22:00:13] over threshold: nothing
+  [22:00:28] over threshold: nothing
+  [22:00:44] over threshold: nothing
+  [22:01:00] over threshold: nothing
+  [22:01:16] over threshold: nothing
+  [22:01:32] over threshold: nothing
+  [22:01:48] over threshold: nothing
+  [22:02:04] over threshold: nothing
+  [22:02:19] over threshold: nothing
+  [22:02:35] over threshold: nothing
+  [22:02:51] over threshold: nothing
+  [22:03:07] over threshold: nothing
+  [22:03:23] over threshold: nothing
+  [22:03:39] over threshold: nothing
+  [22:03:54] over threshold: nothing
+  [22:04:10] over threshold: nothing
+  [22:04:26] over threshold: nothing
+  [22:04:42] over threshold: nothing
+  [22:04:57] over threshold: nothing
+  [22:05:13] over threshold: nothing
+  [22:05:29] over threshold: nothing
+  [22:05:44] over threshold: nothing
+  [22:06:00] over threshold: nothing
+  [22:06:16] over threshold: nothing
+  [22:06:32] over threshold: nothing
+  [22:06:47] over threshold: nothing
+  [22:07:03] over threshold: nothing
+  [22:07:18] over threshold: nothing
+  [22:07:34] over threshold: nothing
+  [22:07:50] over threshold: nothing
+  [22:08:06] over threshold: nothing
+  [22:08:22] over threshold: nothing
+  [22:08:37] over threshold: nothing
+  [22:08:53] over threshold: nothing
+  [22:09:09] over threshold: nothing
+  no alert
+
+N2: PASS {'detection': True, 'diagnosis': True, 'fix': True} said=None confidence=None proposals=[]
+
+# Live suite 20261124
+
+| Case | Fault | Expected | Said (confidence) | Detect s | Investigate s | Detected | Diagnosis | Fix | Pass |
+|---|---|---|---|---|---|---|---|---|---|
+| S1 | recommendation | recommendation | recommendation (high) | 95 | 85 | yes | yes | yes | PASS |
+| S2 | cart | cart | - (-) | 48 | 101 | yes | **no** | **no** | FAIL |
+| N1 | none | no alert | - (-) | - | 0 | yes | yes | yes | PASS |
+| S3 | product-catalog | product-catalog | - (-) | 49 | 61 | yes | **no** | **no** | FAIL |
+| S4 | payment | payment | - (-) | 80 | 98 | yes | **no** | **no** | FAIL |
+| S5 | currency | currency | currency (high) | 95 | 179 | yes | yes | yes | PASS |
+| N2 | none | no alert | - (-) | - | 0 | yes | yes | yes | PASS |
+
+Passed 4 / 7.
+Faults detected 5 / 5, median 80 s, max 95 s.
+Correct service named 2 / 5; correct fix decision 2 / 5.
+No-fault runs without a false alarm 2 / 2.
+
+## Confidence vs correctness (faults that were investigated)
+
+| Confidence | Runs | Correct service | Share correct |
+|---|---|---|---|
+| high | 2 | 2 | 100% |
+| none | 3 | 0 | 0% |
+
+Confident (high) and wrong: none.
+

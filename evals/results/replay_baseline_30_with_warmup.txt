@@ -1,0 +1,12 @@
+
+=== baseline 30 min: 6 alert(s), 0 false alarm(s)
+  11:07:15 true  p95 latency of frontend-proxy is 2.6 s (its 10-min baseline 0.1 s)
+  11:07:30 true  error rate of frontend is 9.9% (its 10-min baseline 0.0%); p95 latency of frontend is 15.0 s (its 10-min baseline 0.1 s)
+  11:34:00 true  error rate of frontend jumped to 8.4% (previous 2 min: 0.0%); p95 latency of frontend is 3.8 s (its 30-min baseline 0.1 s); error rate of frontend-pro
+  11:39:15 true  error rate of frontend jumped to 15.5% (previous 2 min: 2.6%); error rate of frontend-proxy jumped to 8.8% (previous 2 min: 1.4%)
+  12:02:45 true  p95 latency of frontend-proxy is 2.6 s (its 30-min baseline 0.1 s)
+  12:04:00 true  p95 latency of frontend is 15.0 s (its 30-min baseline 0.0 s)
+  fault 11:05:44-11:13:44: detected after 91 s
+  fault 11:32:09-11:35:30: detected after 111 s
+  fault 11:36:52-11:57:40: detected after 143 s
+  fault 12:01:10-12:05:25: detected after 95 s

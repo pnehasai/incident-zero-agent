@@ -1,0 +1,249 @@
+OpenSearch: http://localhost:53684 (was unset; update .env to skip this lookup)
+
+===== S2: stop cart   ()
+  [23:27:56] over threshold: nothing
+  [23:28:12] over threshold: nothing
+  [23:28:28] over threshold: nothing
+  [23:28:44] over threshold: nothing
+  shop quiet after 49 s
+  [23:28:49] over threshold: nothing
+  [23:29:05] over threshold: nothing
+  [23:29:21] over threshold: nothing
+  [23:29:37] over threshold: ['frontend', 'frontend']
+  [23:29:52] over threshold: ['checkout', 'checkout', 'frontend', 'frontend', 'frontend-proxy']
+  ALERT after 64 s: Threshold alert: error rate of frontend is 7.7% (its 30-min baseline 0.0%); p95 latency of frontend is 3.0 s (its 30-min baseline 0.1 s)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124b-S2   Status: DIAGNOSED
+Diagnosis: cart: The cart container stopped reporting and became unreachable (connection errors / no route to host / zero addresses on oteldemo.CartService/GetCart), causing 500 errors and high p95 latency in frontend and checkout.
+Confidence label: high (in where/how it fails, not in why)
+Supporting evidence: ev-resource_overview-ce1e0994, ev-search_traces-ad10617a, ev-service_health-ba1a7fb3
+Uncertainty (still unknown): Telemetry cannot determine why the cart container stopped reporting or crashed.
+Model calls: 4  Tool calls: 7  Elapsed: 79.41s
+Report JSON: runs\20261124b-S2\20261124b-S2_report.json
+Report MD:   runs\20261124b-S2\20261124b-S2_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S2: PASS {'detection': True, 'diagnosis': True, 'fix': True} said='cart' confidence=high proposals=['restart_service:cart']
+
+===== S3: stop product-catalog   ()
+  [23:31:48] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:32:03] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:32:19] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:32:35] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:32:52] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:33:08] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:33:24] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:33:40] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:33:56] over threshold: ['checkout', 'frontend', 'frontend-proxy']
+  [23:34:12] over threshold: ['checkout', 'frontend']
+  [23:34:28] over threshold: ['checkout', 'frontend']
+  [23:34:43] over threshold: ['checkout', 'frontend']
+  [23:34:59] over threshold: ['checkout', 'frontend']
+  [23:35:16] over threshold: ['frontend']
+  [23:35:32] over threshold: ['frontend']
+  [23:35:48] over threshold: nothing
+  [23:36:05] over threshold: nothing
+  [23:36:21] over threshold: nothing
+  [23:36:37] over threshold: nothing
+  shop quiet after 291 s
+  [23:36:41] over threshold: nothing
+  [23:36:58] over threshold: nothing
+  [23:37:15] over threshold: ['frontend', 'recommendation']
+  [23:37:31] over threshold: ['frontend', 'frontend-proxy', 'recommendation']
+  ALERT after 51 s: Threshold alert: error rate of frontend jumped to 5.9% (previous 2 min: 0.0%); error rate of recommendation is 5.1% (its 30-min baseline 0.0%)
+OpenSearch: http://localhost:53684
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+.venv\Lib\site-packages\langchain_google_genai\chat_models.py:3919: UserWarning: Model 'gemini-3.5-flash-lite' uses fixed sampling defaults; the sampling parameter(s) temperature will be ignored.
+  request = self._build_request_config(
+Incident: 20261124b-S3   Status: DIAGNOSED
+Diagnosis: product-catalog: product-catalog container stopped reporting metrics and is unreachable (java.net.UnknownHostException), causing dependent calls from recommendation and frontend to fail with UNAVAILABLE / 500 errors.
+Confidence label: high (in where/how it fails, not in why)
+Supporting evidence: ev-resource_overview-0c782085, ev-search_traces-aa64c189, ev-service_health-62444f54
+Uncertainty (still unknown): Exact reason why the container stopped reporting or crashed cannot be determined from telemetry alone.
+Model calls: 5  Tool calls: 7  Elapsed: 201.91s
+Report JSON: runs\20261124b-S3\20261124b-S3_report.json
+Report MD:   runs\20261124b-S3\20261124b-S3_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Follow-up evidence exists for flagged services but the diagnosis cites none of it: cart
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+limitation: 1 evidence item(s) were queried outside the incident observation window: ev-service_health-ae457f9e
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S3: PASS {'detection': True, 'diagnosis': True, 'fix': True} said='product-catalog' confidence=high proposals=['restart_service:product-catalog']
+
+===== S4: stop payment   ()
+  [23:41:21] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [23:41:36] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [23:41:52] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [23:42:08] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [23:42:24] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation', 'recommendation']
+  [23:42:40] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [23:42:57] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [23:43:13] over threshold: ['checkout', 'frontend', 'frontend-proxy', 'recommendation']
+  [23:43:29] over threshold: ['checkout', 'frontend', 'recommendation']
+  [23:43:45] over threshold: ['checkout', 'frontend', 'recommendation']
+  [23:44:01] over threshold: ['checkout', 'frontend', 'recommendation']
+  [23:44:17] over threshold: ['checkout', 'frontend']
+  [23:44:33] over threshold: ['checkout', 'frontend']
+  [23:44:49] over threshold: ['checkout', 'frontend']
+  [23:45:05] over threshold: ['checkout', 'frontend']
+  [23:45:21] over threshold: ['checkout', 'frontend']
+  [23:45:36] over threshold: nothing
+  [23:45:52] over threshold: nothing
+  [23:46:08] over threshold: nothing
+  [23:46:24] over threshold: nothing
+  shop quiet after 304 s
+  [23:46:29] over threshold: nothing
+  [23:46:46] over threshold: nothing
+  [01:46:36] over threshold: nothing
+  no alert
+OpenSearch: http://localhost:53684
+Incident: 20261124b-S4   Status: ESCALATED
+No diagnosis accepted (escalate to a human).
+Model calls: 1  Tool calls: 0  Elapsed: 0.25s
+Report JSON: runs\20261124b-S4\20261124b-S4_report.json
+Report MD:   runs\20261124b-S4\20261124b-S4_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Model request failed: LLM request failed (google_genai/gemini-3.1-flash-lite) after 1 attempt(s): ConnectError: [Errno 11001] getaddrinfo failed
+limitation: No diagnosis accepted: escalate to a human operator.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S4: FAIL INVALID: clock gap 23:47-04:46 {'detection': False, 'diagnosis': False, 'fix': False} said=None confidence=None proposals=[]
+
+# Live suite 20261124b
+
+| Case | Fault | Expected | Said (confidence) | Detect s | Investigate s | Detected | Diagnosis | Fix | Pass |
+|---|---|---|---|---|---|---|---|---|---|
+| S2 | cart | cart | cart (high) | 64 | 112 | yes | yes | yes | PASS |
+| S3 | product-catalog | product-catalog | product-catalog (high) | 51 | 226 | yes | yes | yes | PASS |
+| S4 | payment | payment | - (-) | - | 11869 | **no** | **no** | **no** | INVALID (clock gap 23:47-04:46) |
+
+Not counted (invalid, re-run by resuming the same --run): S4.
+
+Passed 2 / 2.
+Faults detected 2 / 2, median 64 s, max 64 s.
+Correct service named 2 / 2; correct fix decision 2 / 2.
+No-fault runs without a false alarm 0 / 0.
+
+## Confidence vs correctness (faults that were investigated)
+
+| Confidence | Runs | Correct service | Share correct |
+|---|---|---|---|
+| high | 2 | 2 | 100% |
+
+Confident (high) and wrong: none.
+
+OpenSearch: http://localhost:53684 (was unset; update .env to skip this lookup)
+
+===== S4: stop payment   ()
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  baseline for 0% of services: waiting (warm-up)
+  [08:14:45] over threshold: nothing
+  [08:15:01] over threshold: nothing
+  [08:15:17] over threshold: nothing
+  [08:15:33] over threshold: nothing
+  shop quiet after 49 s
+  [08:15:40] over threshold: nothing
+  [08:15:56] over threshold: nothing
+  [08:16:12] over threshold: ['checkout']
+  [08:16:28] over threshold: ['checkout']
+  ALERT after 48 s: Threshold alert: p95 latency of checkout is 12.4 s (its 10-min baseline 0.7 s)
+OpenSearch: http://localhost:53684
+Incident: 20261124b-S4   Status: DIAGNOSED
+Diagnosis: payment: The payment service is unreachable (name resolver error, no route to host) and has stopped reporting metrics, causing checkout requests to fail.
+Confidence label: high (in where/how it fails, not in why)
+Supporting evidence: ev-resource_overview-85eaca5a, ev-search_traces-b2f5e8ab, ev-service_health-104ac1ef
+Uncertainty (still unknown): The exact reason why the payment service became unreachable (e.g., network partition, process crash, or configuration issue) is not visible in the telemetry.
+Model calls: 3  Tool calls: 5  Elapsed: 18.79s
+Report JSON: runs\20261124b-S4\20261124b-S4_report.json
+Report MD:   runs\20261124b-S4\20261124b-S4_report.md
+Report schema (schemas/incident_report.schema.json): passed
+limitation: No recovery condition supplied; recovery is out of scope for CP0-CP2.
+limitation: Confidence labels are model-reported (capped by evidence rules) and not statistically calibrated.
+limitation: Telemetry tools are live-only; queried windows are recorded per evidence item.
+Grafana: not posted (ConnectError: [WinError 10061] No connection could be made because the target machine actively refused it). Start it with: docker compose -f grafana/compose.yaml up -d
+
+S4: PASS {'detection': True, 'diagnosis': True, 'fix': True} said='payment' confidence=high proposals=['restart_service:payment']
+
+# Live suite 20261124b
+
+| Case | Fault | Expected | Said (confidence) | Detect s | Investigate s | Detected | Diagnosis | Fix | Pass |
+|---|---|---|---|---|---|---|---|---|---|
+| S2 | cart | cart | cart (high) | 64 | 112 | yes | yes | yes | PASS |
+| S3 | product-catalog | product-catalog | product-catalog (high) | 51 | 226 | yes | yes | yes | PASS |
+| S4 | payment | payment | payment (high) | 48 | 44 | yes | yes | yes | PASS |
+
+Passed 3 / 3.
+Faults detected 3 / 3, median 51 s, max 64 s.
+Correct service named 3 / 3; correct fix decision 3 / 3.
+No-fault runs without a false alarm 0 / 0.
+
+## Confidence vs correctness (faults that were investigated)
+
+| Confidence | Runs | Correct service | Share correct |
+|---|---|---|---|
+| high | 3 | 3 | 100% |
+
+Confident (high) and wrong: none.
+

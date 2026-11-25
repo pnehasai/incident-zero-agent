@@ -1,0 +1,9 @@
+
+=== baseline 30 min: 4 alert(s), 0 false alarm(s)
+  13:30:15 true  operation oteldemo.CheckoutService/PlaceOrder of checkout fails 100% of calls (25 of 25 in 10 min; before 0%); operation GET /api/products/[productId]
+  13:32:00 true  p95 latency of ad is 15.0 s (its 10-min baseline 0.0 s)
+  13:35:45 true  error rate of checkout jumped to 22.6% (previous 2 min: 0.0%)
+  13:40:45 true  error rate of checkout is 39.9% (its 10-min baseline 9.7%); p95 latency of checkout is 15.0 s (its 10-min baseline 0.2 s); error rate of frontend jump
+  fault 13:20:13-13:31:30: detected after 602 s
+  fault 13:33:34-13:35:45: detected after 131 s
+  fault 13:38:47-13:41:20: detected after 118 s

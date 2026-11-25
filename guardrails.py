@@ -1,0 +1,91 @@
+"""Guardrails. PLACEHOLDER implementation for Member 4 (Deepika) so the flow runs end to end; replace with the real module."""
+from __future__ import annotations
+
+import json
+import re
+from pathlib import Path
+
+from pydantic import ValidationError
+
+from contracts import DiagnosisValidation, ToolPolicy, ToolRequest, ToolValidation
+from models import Diagnosis, Evidence, ToolStatus
+
+BLOCKED_SERVICES = {"flagd", "flagd-ui"}
+_FLAG_WORDS = re.compile(r"feature[\s_.-]*flags?|flagd|openfeature", re.IGNORECASE)
+
+
+def validate_tool_request(request: ToolRequest, policy: ToolPolicy) -> ToolValidation:
+    model = policy.arg_models.get(request.tool_name)
+    if model is None:
+        return ToolValidation(allowed=False, reasons=[f"tool '{request.tool_name}' is not registered"])
+    unknown = set(request.arguments) - set(model.model_fields)
+    if unknown:
+        return ToolValidation(allowed=False, reasons=[f"unexpected arguments: {sorted(unknown)}"])
+    try:
+        args = model.model_validate(request.arguments).model_dump()
+    except ValidationError as exc:
+        return ToolValidation(allowed=False, reasons=[f"invalid arguments: {exc.errors()[:3]}"])
+    service = args.get("service")
+    if "service" in model.model_fields and service is not None:
+        if service in BLOCKED_SERVICES:
+            return ToolValidation(allowed=False, reasons=[f"service '{service}' is out of bounds"])
+        if service not in policy.approved_services:
+            return ToolValidation(allowed=False, reasons=[f"service '{service}' is not in the approved inventory"])
+    if request.remaining_tool_calls <= 0:
+        return ToolValidation(allowed=False, reasons=["tool-call budget exhausted"])
+    return ToolValidation(allowed=True, tool_name=request.tool_name, arguments=args)
+
+
+_STOPWORDS = {"container", "containers", "service", "services", "restart", "restarts", "outage", "pod", "with", "from", "that", "this", "and", "the"}
+_WORD = re.compile(r"[a-z0-9][a-z0-9_-]{3,}")
+
+
+def _component_in(component: str, haystack: str) -> bool:
+    """True if the component text, or any service-like word inside a longer phrase, appears in the cited evidence."""
+    if component in haystack:
+        return True
+    return any(w not in _STOPWORDS and w in haystack for w in _WORD.findall(component))
+
+
+def validate_diagnosis(diagnosis: Diagnosis, evidence: list[Evidence]) -> DiagnosisValidation:
+    errors: list[str] = []
+    by_id = {e.evidence_id: e for e in evidence}
+    cited = diagnosis.supporting_evidence_ids + diagnosis.conflicting_evidence_ids
+    if not diagnosis.supporting_evidence_ids:
+        errors.append("diagnosis cites no supporting evidence")
+    for eid in cited:
+        ev = by_id.get(eid)
+        if ev is None:
+            errors.append(f"cited evidence '{eid}' was not captured in this investigation")
+        elif not ev.local_capture_reference or not Path(ev.local_capture_reference).is_file():
+            errors.append(f"capture for evidence '{eid}' is missing on disk")
+    if set(diagnosis.supporting_evidence_ids) & set(diagnosis.conflicting_evidence_ids):
+        errors.append("an evidence ID is cited as both supporting and conflicting")
+    supporting = [by_id[i] for i in diagnosis.supporting_evidence_ids if i in by_id]
+    if supporting and not any(e.status == ToolStatus.OK for e in supporting):
+        errors.append("no supporting evidence has status 'ok' (empty/unavailable/error results cannot support a cause)")
+    said = " ".join([diagnosis.suspected_component, diagnosis.suspected_cause, diagnosis.uncertainty,
+                     diagnosis.next_step, *diagnosis.alternatives])
+    if _FLAG_WORDS.search(said):
+        errors.append("diagnosis refers to feature flags; flag state is out of bounds: describe the failure from telemetry only")
+    if supporting:
+        component = diagnosis.suspected_component.lower()
+        haystack = " ".join(
+            f"{e.service or ''} {e.query} {json.dumps(e.observed_value, default=str)}" for e in supporting
+        ).lower()
+        if not _component_in(component, haystack):
+            errors.append(f"suspected component '{diagnosis.suspected_component}' does not appear in any cited supporting evidence (heuristic check)")
+    named = _services_named(diagnosis.suspected_component, evidence)
+    if len(named) > 1:
+        errors.append(f"suspected_component names several services ({', '.join(named)}): name the ONE best-supported "
+                      "component and list each other active problem under alternatives as 'also active: <service> - <evidence>'")
+    return DiagnosisValidation(valid=not errors, errors=errors)
+
+
+def _services_named(component: str, evidence: list[Evidence]) -> list[str]:
+    """Services (as seen in this investigation's telemetry) that the component text names."""
+    from candidates import observed_services
+
+    text = component.lower()
+    return sorted(s for s in observed_services(evidence)
+                  if s and re.search(rf"(?<![\w-]){re.escape(s.lower())}(?![\w-])", text))
